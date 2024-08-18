@@ -74,34 +74,63 @@
         .libro { background-image: url('libro.png'); }
         .mascaras { background-image: url('mascaras.png'); }
 
-        /* Animaciones para los electrones */
+        /* Animaciones para los electrones y el núcleo */
+        .ciencias-container {
+            position: relative;
+        }
+
+        .nucleo {
+            width: 80px;
+            height: 80px;
+            background-image: url('nucleo.png');
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
         .electron {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: #ccc;
-            position: relative;
+            background-image: url('electron.png');
+            position: absolute;
             animation: orbit 4s linear infinite;
         }
 
+        .electron:nth-child(2) {
+            animation-duration: 5s;
+        }
+
+        .electron:nth-child(3) {
+            animation-duration: 6s;
+        }
+
         @keyframes orbit {
-            from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
-            to { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+            from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
         }
 
-        /* Tenderetes en la tienda */
-        .tenderete {
-            width: 150px;
-            height: 150px;
-            background-color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        /* Imagen del mercadillo */
+        .mercadillo {
+            width: 300px;
+            height: 200px;
+            background-image: url('mercadillo.png');
+            background-size: cover;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
 
-        .tenderete:hover {
-            background-color: #ccc;
+        .mercadillo:hover {
+            transform: scale(1.1);
         }
 
         /* Carrusel de contacto */
@@ -154,19 +183,16 @@
     <section id="ciencias" class="ciencias">
         <h2 class="section-title">Ciencias</h2>
         <div class="ciencias-container">
-            <div class="electron" onclick="showCiencias('fisica')">Física</div>
-            <div class="electron" onclick="showCiencias('quimica')">Química</div>
-            <div class="electron" onclick="showCiencias('biologia')">Biología</div>
+            <div class="nucleo"></div>
+            <div class="electron" onclick="showCiencias('fisica')"></div>
+            <div class="electron" onclick="showCiencias('quimica')"></div>
+            <div class="electron" onclick="showCiencias('biologia')"></div>
         </div>
     </section>
 
     <section id="tienda" class="tienda">
         <h2 class="section-title">Tienda</h2>
-        <div class="tienda-container">
-            <div class="tenderete" onclick="showTienda('merch')">Zeususklai Merchandising</div>
-            <div class="tenderete" onclick="showTienda('cuero')">Marcelus Wallace Artesanías de Cuero</div>
-            <div class="tenderete" onclick="showTienda('ceramica')">Kronusklai Cerámicas</div>
-        </div>
+        <div class="mercadillo" onclick="showTienda('productos')"></div>
     </section>
 
     <section id="contacto" class="contacto">
@@ -190,7 +216,8 @@
         }
 
         function showTienda(seccion) {
-            alert("Abriendo " + seccion);
+            // Aquí puedes redirigir a la página de productos de la tienda
+            window.open('tienda.html', '_blank');
         }
     </script>
 </body>
